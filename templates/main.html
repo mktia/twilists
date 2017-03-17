@@ -1,0 +1,60 @@
+<html>
+<head>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
+	<![endif]-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{{info['description']}}">
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="{{info['description']}}">
+	<meta property="og:title" content="{{info['app_name']}} ({{info['name']}})">
+	<meta property="og:url" content="{{info['url']}}">
+	<meta property="og:image" content="{{info['url']}}/static/ogp_small.jpg">
+	<meta property="og:site_name" content="{{info['app_name']}} ({{info['name']}})">
+	<meta property="og:locale" content="ja_JP">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="{{info['description']}}">
+	<meta name="twitter:title" content="{{info['app_name']}} {{info['name']}}">
+	<meta name="twitter:url" content="{{info['url']}}">
+	<meta name="twitter:image" content="{{info['url']}}/static/ogp_small.jpg">
+	<meta name="twitter:domain" content="{{info['url']}}">
+	<meta name="twitter:creator" content="@_mktia">
+	<meta name="twitter:site" content="@_mktia">
+	<title>{{info['app_name']}} ({{info['name']}}) | {{info['short_description']}}</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="../static/style.css" type="text/css"> -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<style>
+		body {
+			color: #444;
+			font-family: 'Open Sans', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', serif;
+			margin: 0;
+		}
+		body p {
+			margin-left: 6px;
+			margin-right: 6px;
+		}
+		header p {
+			font-family: 'Raleway' !important;
+			font-size: 40px;
+			text-align: center;
+		}
+		header#top {
+			background-color: #444;
+			color: #eee;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		@media screen and (max-width: 425px) {
+		}
+	</style>
+	<!-- googleanalytics -->
+</head>
+<body>
+<img src="{{user['icon']}}"> {{user['name']}} @{{user['screen_name']}}<br>
+<br>
+<a href="{{re_text}}">FF分析</a>
+</body>
+</html>

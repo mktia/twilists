@@ -1,0 +1,132 @@
+# -*- coding: utf-8 -*-
+import os
+import urllib2
+import tweepy
+from flask import Flask, render_template, session, request, redirect
+
+app = Flask(__name__)
+
+app.secret_key = os.environ['secret_key']
+consumer_key = os.environ['consumer_key']
+consumer_secret = os.environ['consumer_secret']
+
+setting = {
+	'app_name': 'TWILIST',
+	'name': u'ツイリスト',
+	'description': u'相互フォローチェック、定期ツイート・BOT排除などに活用できるアプリ TWILIST (ツイリスト)', 
+	'short_description': u'自動生成リストで Twitter をより便利に',
+	'url': 'https://twilists.herokuapp.com',
+	}
+
+callback_url = setting['url']
+user = {}
+
+def verify():
+	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url)
+	auth.request_token = session.pop('request_token')
+	auth.get_access_token(session.pop('verifier'))
+	auth.set_access_token(auth.access_token, auth.access_token_secret)
+	return(tweepy.API(auth))
+
+def get_profile_image(obj):
+	"""
+		obj: User object
+	"""
+	try:
+		profile_img = obj.profile_image_url
+		profile_img = (obj.profile_image_url[:profile_img.rfind('_')]
+			+ obj.profile_image_url[profile_img.rfind('.'):])
+		return profile_img
+	except:
+		return obj.profile_image_url
+
+@app.route('/')
+def top():
+	if 'name' in session:
+		auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url + '/ff')
+		redirect_url_ff = auth.get_authorization_url(signin_with_twitter=True)
+		session['request_token'] = auth.request_token
+		user['name'] = session.get('name')
+		user['screen_name'] = session.get('screen_name')
+		user['icon'] = session.get('icon')
+		return(render_template('main.html', info=setting, user=user, re_text=redirect_url_ff))
+	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url + '/login')
+	redirect_url = auth.get_authorization_url()
+	session['request_token'] = auth.request_token
+	return(render_template('index.html', info=setting, url=redirect_url))
+
+@app.route('/login')
+def oauth_login():
+	session['verifier'] = request.args.get('oauth_verifier')
+	api = verify()
+	
+	owner = api.me()
+	session['name'] = owner.name
+	session['screen_name'] = owner.screen_name
+	session['icon'] = get_profile_image(owner)
+	return(redirect(setting['url']))
+
+@app.route('/ff')
+def ff_check():
+	def make_list(input_list, output_dict):
+		for i in range(0, len(input_list[:]), 100):
+			for user in api.lookup_users(input_list[i:i+100]):
+				output_dict['screen_name'].append(user.screen_name)
+				output_dict['name'].append(user.name)
+				output_dict['icon'].append(get_profile_image(user))
+	
+	session['verifier'] = request.args.get('oauth_verifier')
+	api = verify()
+	
+	length = {}
+	friends = []
+	followers = []
+	
+	for fr in tweepy.Cursor(api.friends_ids).items():
+		friends.append(fr)
+	for fo in tweepy.Cursor(api.followers_ids).items():
+		followers.append(fo)
+	
+	print('follows: %d, followers: %d' % (len(friends), len(followers)))
+	
+	fr_and_fo_id = []
+	not_fr_id = [] # The ID list of account you aren't following.
+	not_fo_id = [] # The ID list of account you aren't followed by.
+	
+	fr_and_fo = {'name':[], 'screen_name':[], 'icon':[]}
+	not_fr = {'name':[], 'screen_name':[], 'icon':[]}
+	not_fo = {'name':[], 'screen_name':[], 'icon':[]}
+	
+	for fr in friends:
+		for fo in followers:
+			if fr == fo:
+				fr_and_fo_id.append(fr)
+				break
+		else:
+			not_fo_id.append(fr)
+	for fo in followers:
+		for fr in friends:
+			if fo == fr:
+				break
+		else:
+			not_fr_id.append(fo)
+
+	make_list(fr_and_fo_id, fr_and_fo)
+	make_list(not_fr_id, not_fr)
+	make_list(not_fo_id, not_fo)
+	
+	length['num_fr_and_fo'] = len(fr_and_fo['screen_name'])
+	length['num_not_fo'] = len(not_fo['screen_name'])
+	length['num_not_fr'] = len(not_fr['screen_name'])
+	print('ff: %d, not_fo: %d, not_fr: %d'
+		% (length['num_fr_and_fo'], length['num_not_fo'], length['num_not_fr'])) 
+	
+	return render_template('result.html', info=setting,
+		fr_and_fo=fr_and_fo, not_fo=not_fo, not_fr=not_fr, length=length)
+
+#@app.route('/contact')
+
+#top version
+
+if __name__ == '__main__':
+	app.run()
