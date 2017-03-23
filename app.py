@@ -58,7 +58,7 @@ def get_profile_image(obj):
 def make_list(api, input_list, output_dict):
 	start = time.time()
 	for i in range(0, len(input_list[:]), 100):
-		if(time.time() - start > 14):
+		if(time.time() - start > 18):
 			return(True)
 		for user in api.lookup_users(input_list[i:i+100]):
 			output_dict['screen_name'].append(user.screen_name)
