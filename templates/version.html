@@ -28,24 +28,19 @@
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<!-- googleanalytics -->
 </head>
-<body class="index">
+<body class="main">
 	<div class="contents">
 		<header>
-			<h1>{{info['app_name']}}</h1>
+			<div class="header-bar">
+				<a href="{{info['url']}}"><h1>{{info['app_name']}}</h1></a>
+			</div>
 		</header>
-		<section>
-			<h2 class="center">　Twitter をより便利に。</h2>
-			<p class="behind center">- More confortable. -</p>
-			<br>
-			<div class="desc">
-				<p>{{info['app_name']}} ({{info['name']}}) では、Twitter  アカウントを様々な特徴で分類してリストにすることができます。相互フォローアカウントや自動投稿の頻度、長期間ツイートしていないアカウントのチェックなどの多彩な機能は、フォローの整理に大いに役立つでしょう！</p>
-				<p>{{info['app_name']}} categorize the accounts you are following and followed by. This application helps you to manage your friends on twitter!</p>
-			</div>
-			<div class="loginbox">
-				<p>Log in with your Twitter account.</p>
-				<hr color="#ccc" size="1" width="300px">
-				<p><a class="button" href="{{url}}">Log in</a></p>
-			</div>
+		<section class="version">
+			<h2>更新情報</h2>
+			<p>2017/03/17</p>
+			<p class="desc">プロトタイプ公開</p>
+			<p>2017/03/24</p>
+			<p class="desc">デザイン刷新</p>
 		</section>
 		<footer>
 			<p><a href="{{info['url']}}/about">About</a> | <a href="{{info['url']}}/version">Version</a></p>

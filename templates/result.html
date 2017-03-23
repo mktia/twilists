@@ -1,4 +1,5 @@
-<html><head>
+<html>
+<head>
 	<!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
@@ -23,59 +24,42 @@
 	<meta name="twitter:site" content="@_mktia">
 	<title>{{info['app_name']}} ({{info['name']}}) | {{info['short_description']}}</title>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="../static/style.css" type="text/css"> -->
+	<link rel="stylesheet" href="../static/style.css" type="text/css">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-	<style>
-		body {
-			color: #444;
-			font-family: 'Open Sans', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', serif;
-			margin: 0;
-		}
-		body p {
-			margin-left: 6px;
-			margin-right: 6px;
-		}
-		header p {
-			font-family: 'Raleway' !important;
-			font-size: 40px;
-			text-align: center;
-		}
-		header#top {
-			background-color: #444;
-			color: #eee;
-			padding-bottom: 0px;
-			padding-top: 0px;
-		}
-		@media screen and (max-width: 425px) {
-		}
-	</style>
 	<!-- googleanalytics -->
 </head>
-<body>
-<meta charset="utf-8">
-<h2>fr_and_fo</h2>
-{% if length['num_fr_and_fo'] == 0 %}
-両思いはいません。
-{% else %}
-	{% for i in range(length['num_fr_and_fo']) %}
-	<img style="height: 50px; width: 50px;" src="{{fr_and_fo['icon'][i]}}"> {{fr_and_fo['name'][i]}} @{{fr_and_fo['screen_name'][i]}}<br>
-	{% endfor %}
-{% endif %}
-<h2>not_fo</h2>
-{% if length['num_not_fo'] == 0 %}
-片思いはいません。
-{% else %}
-	{% for i in range(length['num_not_fo']) %}
-	<img style="height: 50px; width: 50px;" src="{{not_fo['icon'][i]}}"> {{not_fo['name'][i]}} @{{not_fo['screen_name'][i]}}<br>
-	{% endfor %}
-{% endif %}
-<h2>not_fr</h2>
-{% if length['num_not_fr'] == 0 %}
-片思われはいません。
-{% else %}
-	{% for i in range(length['num_not_fr']) %}
-	<img style="height: 50px; width: 50px;" src="{{not_fr['icon'][i]}}"> {{not_fr['name'][i]}} @{{not_fr['screen_name'][i]}}<br>
-	{% endfor %}
-{% endif %}
+<body class="main">
+	<div class="contents">
+		<header>
+			<div class="header-bar">
+				<a href="{{info['url']}}"><h1>{{info['app_name']}}</h1></a>
+				<a class="icon-link" href="http://twitter.com/{{user['screen_name']}}"><img class="icon" src="{{user['icon']}}"></a>
+			</div>
+		</header>
+		<section class="result">
+			<h2>{{res['title']}}</h2>
+			{% if overtime:%}
+			<p>処理時間をオーバーしたため、途中で強制終了しました。</p>
+			{% endif %}
+			{% if res['length'] == 0 %}
+			{{res['message']}}
+			{% else %}
+				<p>対象のユーザー：{{res['length']}}人</p>
+				{% for i in range(res['length']) %}
+				<a class="box" href="http://twitter.com/{{list['screen_name'][i]}}" target="_blank">
+					<table>
+						<tr><td rowspan="2"><img style="height: 50px; width: 50px;" src="{{list['icon'][i]}}"></td><td>{{list['name'][i]}}</td></tr>
+						<tr><td>@{{list['screen_name'][i]}}</td></tr>
+					</table>
+				</a>
+				{% endfor %}
+			{% endif %}
+		</section>
+		<footer>
+			<p><a href="{{info['url']}}/about">About</a> | <a href="{{info['url']}}/version">Version</a></p>
+			<p>&copy;2017 <a href="http://twitter.com/_mktia">mktia</a> All rights reserved.</p>
+		</footer>
+	</div>
+</body>
 </body>
 </html>

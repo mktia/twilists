@@ -28,24 +28,23 @@
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<!-- googleanalytics -->
 </head>
-<body class="index">
+<body class="main">
 	<div class="contents">
 		<header>
-			<h1>{{info['app_name']}}</h1>
+			<div class="header-bar">
+				<a href="{{info['url']}}"><h1>{{info['app_name']}}</h1></a>
+			</div>
 		</header>
-		<section>
-			<h2 class="center">　Twitter をより便利に。</h2>
-			<p class="behind center">- More confortable. -</p>
+		<section class="about">
+			<h2>このアプリについて</h2>
+			<p>{{info['app_name']}} ({{info['name']}}) はフォローアカウントの整理及び TL の見やすさを改善することを主な目的として個人的に開発した Web アプリケーションです。</p>
+			<p>現在よく使われているアプリケーションでは、片思いアカウントとしてフォロバされているアカウントが表示されるなどの不具合が見られることがきっかけとなりました。</p>
+			<p>おかげさまで正確なフォロー・フォロワー情報を取得することができるようになりましたが、一度に数千のフォロー・フォロワーアカウントを、となるとサーバの処理時間の限界に達してしまい、残念ながらそのメリットを最大限活かしきれていません。</p>
+			<p>時間と気力が許す限りぼちぼち直していきたいところですが、まあ先のことはわかりません。お許しください。</p>
+			<p>from mktia - 2017/03/23</p>
 			<br>
-			<div class="desc">
-				<p>{{info['app_name']}} ({{info['name']}}) では、Twitter  アカウントを様々な特徴で分類してリストにすることができます。相互フォローアカウントや自動投稿の頻度、長期間ツイートしていないアカウントのチェックなどの多彩な機能は、フォローの整理に大いに役立つでしょう！</p>
-				<p>{{info['app_name']}} categorize the accounts you are following and followed by. This application helps you to manage your friends on twitter!</p>
-			</div>
-			<div class="loginbox">
-				<p>Log in with your Twitter account.</p>
-				<hr color="#ccc" size="1" width="300px">
-				<p><a class="button" href="{{url}}">Log in</a></p>
-			</div>
+			<p>P.S.</p>
+			<p>何かあったら Twitter のアカウント (<a href="http://twitter.com/_mktia">@_mktia</a>) にでもお気軽にどうぞ。</p>
 		</section>
 		<footer>
 			<p><a href="{{info['url']}}/about">About</a> | <a href="{{info['url']}}/version">Version</a></p>
