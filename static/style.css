@@ -29,6 +29,21 @@ section {
 .about p {
 	margin-bottom: 30px;
 }
+.ads:before {
+	content: "スポンサーリンク";
+	font-size: 12px;
+	margin-bottom: 3px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+}
+.ads-pc td {
+	padding-left: 3px;
+	padding-right: 3px;
+}
+.ads-sp, .ads-sp-small {
+	display: none;
+}
 .box {
 	background-color: #fff;
 	border-radius: 5px;
@@ -169,6 +184,16 @@ section {
 	margin-left: 20px;
 }
 @media screen and (max-width: 768px) {
+	.ads-pc {
+		display: none;
+	}
+	.ads-sp {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		width: 336px;
+	}
 	.contents {
 		margin-left: auto;
 		margin-right: auto;
@@ -210,5 +235,17 @@ section {
 	.main header {
 		margin-left: -2%;
 		margin-right: -2%;
+	}
+}
+@media screen and (max-width: 350px) {
+	.ads-sp {
+		display: none;
+	}
+	.ads-sp-small {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		width: 300px;
 	}
 }
