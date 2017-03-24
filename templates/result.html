@@ -61,6 +61,7 @@
 						<tr><td>@{{list['screen_name'][i]}}</td></tr>
 					</table>
 				</a>
+				{% if i != 0 %}
 				{% if i % 100 == 0 %}
 				<div class="ads ads-pc">
 					<table>
@@ -110,6 +111,7 @@
 					(adsbygoogle = window.adsbygoogle || []).push({});
 					</script>
 				</div>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			{% endif %}
