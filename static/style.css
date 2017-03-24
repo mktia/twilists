@@ -32,10 +32,10 @@ section {
 .ads:before {
 	content: "スポンサーリンク";
 	font-size: 12px;
-	margin-bottom: 3px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 200px;
+}
+.ads-list {
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 .ads-pc td {
 	padding-left: 3px;
