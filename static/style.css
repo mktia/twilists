@@ -86,7 +86,7 @@ section {
 }
 .index {
 	background-attachment: fixed;
-	background-image: url('filter.png'), url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('filter-black.png'), url('bg1.jpg');
+	background-image: url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('bg1.jpg');
 	background-position: center center;
 	background-repeat: repeat, no-repeat;
 	background-size: cover;
@@ -222,12 +222,12 @@ section {
 }
 @media screen and (max-width: 1440px) {
 	.index {
-		background-image: url('filter.png'), url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('filter-black.png'), url('bg1_small.jpg');
+		background-image: url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('bg1_small.jpg');
 	}
 }
 @media screen and (max-width: 960px) {
 	.index {
-		background-image: url('filter.png'), url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('filter-black.png'), url('bg1_sp.jpg');
+		background-image: url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('bg1_sp.jpg');
 	}
 }
 @media screen and (max-width: 425px) {
