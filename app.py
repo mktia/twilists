@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import urllib2
 import time
 import tweepy
 from flask import Flask, render_template, session, request, redirect
@@ -16,7 +15,8 @@ setting = {
 	'name': u'ツイリスト',
 	'description': u'相互フォローチェック、定期ツイート・BOT排除などに活用できるアプリ TWILIST (ツイリスト)', 
 	'short_description': u'自動生成リストで Twitter をより便利に',
-	'url': 'https://twilists.herokuapp.com',
+	#'url': 'https://twilists.herokuapp.com',
+	'url': 'http://twilist.mktia.com',
 	}
 
 callback_url = setting['url']
@@ -65,13 +65,14 @@ def make_list(api, input_list, output_dict):
 			output_dict['name'].append(user.name)
 			output_dict['icon'].append(get_profile_image(user))
 	return(False)
-			
+
 @app.route('/')
 def top():
 	if 'name' in session:
 		session['request_token_not_friend'] = xauth_verify('not_friend')
 		session['request_token_not_follow'] = xauth_verify('not_follow')
 		session['request_token_ff'] = xauth_verify('ff')
+		session['request_token_bot_check'] = xauth_verify('bot_check')
 		user['name'] = session.get('name')
 		user['screen_name'] = session.get('screen_name')
 		user['icon'] = session.get('icon')
@@ -198,6 +199,56 @@ def ff_check():
 		return render_template('result.html', info=setting,	user=user, list=fr_and_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
 
+@app.route('/bot_check')
+def is_bot_check():
+	st = time.time()
+	if 'name' in session:
+		session['verifier'] = request.args.get('oauth_verifier')
+		api = verify('request_token_bot_check')
+		
+		friends = []
+		
+		for fr in tweepy.Cursor(api.friends_ids).items():
+			friends.append(fr)
+		
+		bot_id_tmp = []
+		bot_id = []
+		bot = {'name':[], 'screen_name':[], 'icon':[]}
+		
+		clients = ['auto', 'bot']
+		
+		for i in range(0, len(friends[:]), 100):
+			for user in api.lookup_users(friends[i:i+100]):
+				for client in clients:
+					if user.status.source.find(client) != -1:
+						bot_id_tmp.append(user.id)
+						break
+		for bot_tmp in bot_id_tmp:
+			tls = api.user_timeline(id=bot_tmp)
+			try:
+				tweet_count = tls[0].author._json[u'statuses_count']
+				if tweet_count > 10:
+					tweet_count = 10
+				for i in range(tweet_count):
+					for client in clients:
+						tl = tls[i]._json[u'source']
+						if tl.find(client) != 1:
+							break
+				else:
+					bot_id.append(bot_tmp)
+			except Exception as e:
+				print(e)
+
+		overtime = make_list(api, bot_id, bot)
+		res['title'] = u'定期ツイートが多いフォロー中のユーザー'
+		res['length'] = len(bot['screen_name'])
+		res['message'] = u'該当するユーザーはいませんでした。'
+		
+		print(time.time() - st)
+		
+		return render_template('result.html', info=setting,	user=user, list=bot, res=res, overtime=overtime)
+	return(redirect(setting['url']))
+
 @app.route('/about')
 def about():
 	return(render_template('about.html', info=setting))
@@ -207,4 +258,4 @@ def version():
 	return(render_template('version.html', info=setting))
 
 if __name__ == '__main__':
-	app.run()
+	app.run(host='153.126.217.254', port=8000)
