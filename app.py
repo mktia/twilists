@@ -220,6 +220,8 @@ def is_bot_check():
 		for i in range(0, len(friends[:]), 100):
 			for user in api.lookup_users(friends[i:i+100]):
 				for client in clients:
+					print(user)
+					exit()
 					src = user.status.source
 					if src.find(client) != -1:
 						bot_id_tmp.append(user.id)
