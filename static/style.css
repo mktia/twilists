@@ -80,8 +80,9 @@ section {
 	margin-top: 0;
 }
 .icon {
+	border: solid 2px #fafafa;
 	border-radius: 2em;
-	height: 3em;
+	height: 2.4em;
 }
 .index {
 	background-attachment: fixed;
@@ -222,6 +223,11 @@ section {
 @media screen and (max-width: 1440px) {
 	.index {
 		background-image: url('filter.png'), url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('filter-black.png'), url('bg1_small.jpg');
+	}
+}
+@media screen and (max-width: 960px) {
+	.index {
+		background-image: url('filter.png'), url('filter.png'), url('filter-black.png'), url('filter-black.png'), url('filter-black.png'), url('bg1_sp.jpg');
 	}
 }
 @media screen and (max-width: 425px) {
