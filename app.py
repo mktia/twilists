@@ -219,8 +219,10 @@ def is_bot_check():
 		
 		for i in range(0, len(friends[:]), 100):
 			for user in api.lookup_users(friends[i:i+100]):
+				print(type(user))
+				exit()
 				for client in clients:
-					if user.source.find(client) != -1:
+					if user.status.source.find(client) != -1:
 						bot_id_tmp.append(user.id)
 						break
 		for bot_tmp in bot_id_tmp:
@@ -258,4 +260,4 @@ def version():
 	return(render_template('version.html', info=setting))
 
 if __name__ == '__main__':
-	app.run(host='153.126.217.254', port=8000)
+	app.run()
