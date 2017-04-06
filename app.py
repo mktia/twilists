@@ -220,15 +220,13 @@ def is_bot_check():
 		for i in range(0, len(friends[:]), 100):
 			for user in api.lookup_users(friends[i:i+100]):
 				try:
-					print(user.status.source)
+					src = user.status.source.encode('utf8')
+					for client in clients:
+						if src.find(client) != -1:
+							bot_id_tmp.append(user.id)
+							break
 				except:
-					print('err')
-				src = user.status.source.encode('utf8')
-				print(src)
-				for client in clients:
-					if src.find(client) != -1:
-						bot_id_tmp.append(user.id)
-						break
+					print('error: %d'%user.id)
 		for bot_tmp in bot_id_tmp:
 			tls = api.user_timeline(id=bot_tmp)
 			try:
