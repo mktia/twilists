@@ -58,6 +58,7 @@ section {
 }
 .button {
 	background-color: #004898;
+	border: 1px solid #ccc;
 	border-radius: 3px;
 	color: #fff;
 	display: block;
@@ -149,6 +150,9 @@ section {
 }
 .index .loginbox p {
 	color: #444;
+}
+.main {
+	overflow-x: hidden;
 }
 .main header {
 	background-color: #55acee;
