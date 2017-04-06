@@ -55,10 +55,10 @@ def get_profile_image(obj):
 	except:
 		return(obj.profile_image_url)
 		
-def make_list(api, input_list, output_dict):
+def make_list(api, input_list, output_dict, limit_time=20):
 	start = time.time()
 	for i in range(0, len(input_list[:]), 100):
-		if(time.time() - start > 20):
+		if(time.time() - start > limit_time):
 			return(True)
 		for user in api.lookup_users(input_list[i:i+100]):
 			output_dict['screen_name'].append(user.screen_name)
@@ -243,7 +243,7 @@ def is_bot_check():
 			except Exception as e:
 				print(e)
 
-		overtime = make_list(api, bot_id, bot)
+		overtime = make_list(api, bot_id, bot, limit_time=15)
 		res['title'] = u'定期ツイートが多いフォロー中のユーザー'
 		res['length'] = len(bot['screen_name'])
 		res['message'] = u'該当するユーザーはいませんでした。'
