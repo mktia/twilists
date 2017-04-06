@@ -20,7 +20,7 @@ setting = {
 	}
 
 callback_url = setting['url']
-user = {}
+app_user = {}
 twitter = {}
 res = {}
 
@@ -73,10 +73,10 @@ def top():
 		session['request_token_not_follow'] = xauth_verify('not_follow')
 		session['request_token_ff'] = xauth_verify('ff')
 		session['request_token_bot_check'] = xauth_verify('bot_check')
-		user['name'] = session.get('name')
-		user['screen_name'] = session.get('screen_name')
-		user['icon'] = session.get('icon')
-		return(render_template('main.html', info=setting, user=user, twitter=twitter))
+		app_user['name'] = session.get('name')
+		app_user['screen_name'] = session.get('screen_name')
+		app_user['icon'] = session.get('icon')
+		return(render_template('main.html', info=setting, user=app_user, twitter=twitter))
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url + '/login')
 	redirect_url = auth.get_authorization_url()
 	session['request_token'] = auth.request_token
@@ -127,7 +127,7 @@ def not_fr_check():
 		
 		print(time.time() - st)
 		
-		return render_template('result.html', info=setting,	user=user, list=not_fr, res=res, overtime=overtime)
+		return render_template('result.html', info=setting,	user=app_user, list=not_fr, res=res, overtime=overtime)
 	return(redirect(setting['url']))
 		
 @app.route('/not_follow')
@@ -162,7 +162,7 @@ def not_fo_check():
 		
 		print(time.time() - st)
 		
-		return render_template('result.html', info=setting,	user=user, list=not_fo, res=res, overtime=overtime)
+		return render_template('result.html', info=setting,	user=app_user, list=not_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
 		
 @app.route('/ff')
@@ -196,7 +196,7 @@ def ff_check():
 		
 		print(time.time() - st)
 		
-		return render_template('result.html', info=setting,	user=user, list=fr_and_fo, res=res, overtime=overtime)
+		return render_template('result.html', info=setting,	user=app_user, list=fr_and_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
 
 @app.route('/bot_check')
@@ -250,7 +250,7 @@ def is_bot_check():
 		
 		print(time.time() - st)
 		
-		return render_template('result.html', info=setting,	user=user, list=bot, res=res, overtime=overtime)
+		return render_template('result.html', info=setting,	user=app_user, list=bot, res=res, overtime=overtime)
 	return(redirect(setting['url']))
 
 @app.route('/about')
