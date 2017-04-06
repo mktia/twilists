@@ -243,7 +243,7 @@ def is_bot_check():
 			except Exception as e:
 				print(e)
 
-		overtime = make_list(api, bot_id, bot, limit_time=15)
+		overtime = make_list(api, bot_id, bot, limit_time=10)
 		res['title'] = u'定期ツイートが多いフォロー中のユーザー'
 		res['length'] = len(bot['screen_name'])
 		res['message'] = u'該当するユーザーはいませんでした。'
