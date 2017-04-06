@@ -200,11 +200,13 @@ section {
 		margin-right: auto;
 		width: 468px;
 	}
+	.desc p {
+		margin-right: 8px;
+	}
 	.index .desc {
 		float: none;
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 0;
 		width: 96%;
 	}
 	.index .loginbox {
