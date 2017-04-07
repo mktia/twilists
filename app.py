@@ -218,7 +218,7 @@ def is_bot_check():
 		clients = ['auto', 'bot']
 		
 		for i in range(0, len(friends[:]), 100):
-			if time.time() - st < 5.0:
+			if time.time() - st < 8.0:
 				for user in api.lookup_users(friends[i:i+100]):
 					try:
 						src = user.status.source.encode('utf8')
@@ -228,6 +228,9 @@ def is_bot_check():
 								break
 					except:
 						print('error: %d'%user.id)
+			else:
+				overtime = True
+				break
 		for bot_tmp in bot_id_tmp:
 			if time.time() - st < 15.0:
 				tls = api.user_timeline(id=bot_tmp)
@@ -244,8 +247,15 @@ def is_bot_check():
 						bot_id.append(bot_tmp)
 				except Exception as e:
 					print(e)
+			else:
+				overtime = True
+				break
 		
-		overtime = make_list(api, bot_id, bot, limit_time=10)
+		overtime_tmp = make_list(api, bot_id, bot, limit_time=10)
+		if overtime:
+			pass
+		else:
+			overtime = overtime_tmp
 		res['title'] = u'定期ツイートが多いフォロー中のユーザー'
 		res['length'] = len(bot['screen_name'])
 		res['message'] = u'該当するユーザーはいませんでした。'
