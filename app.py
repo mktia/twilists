@@ -124,6 +124,9 @@ def not_fr_check():
 		res['title'] = u'フォローを返していないフォロワー'
 		res['length'] = len(not_fr['screen_name'])
 		res['message'] = u'あなたがフォローを返していないフォロワーはいませんでした。'
+		app_user['name'] = session.get('name')
+		app_user['screen_name'] = session.get('screen_name')
+		app_user['icon'] = session.get('icon')
 		
 		print(time.time() - st)
 		
@@ -159,6 +162,9 @@ def not_fo_check():
 		res['title'] = u'あなたをフォローしていないフォロワー'
 		res['length'] = len(not_fo['screen_name'])
 		res['message'] = u'あなたをフォローしていないフォロワーはいませんでした。'
+		app_user['name'] = session.get('name')
+		app_user['screen_name'] = session.get('screen_name')
+		app_user['icon'] = session.get('icon')
 		
 		print(time.time() - st)
 		
@@ -193,6 +199,9 @@ def ff_check():
 		res['title'] = u'相互フォローのユーザー'
 		res['length'] = len(fr_and_fo['screen_name'])
 		res['message'] = u'互いにフォローしているユーザーはいませんでした。'
+		app_user['name'] = session.get('name')
+		app_user['screen_name'] = session.get('screen_name')
+		app_user['icon'] = session.get('icon')
 		
 		print(time.time() - st)
 		
@@ -218,7 +227,7 @@ def is_bot_check():
 		clients = ['auto', 'bot']
 		
 		for i in range(0, len(friends[:]), 100):
-			if time.time() - st < 8.0:
+			if time.time() - st < 7.0:
 				for user in api.lookup_users(friends[i:i+100]):
 					try:
 						src = user.status.source.encode('utf8')
@@ -259,6 +268,9 @@ def is_bot_check():
 		res['title'] = u'定期ツイートが多いフォロー中のユーザー'
 		res['length'] = len(bot['screen_name'])
 		res['message'] = u'該当するユーザーはいませんでした。'
+		app_user['name'] = session.get('name')
+		app_user['screen_name'] = session.get('screen_name')
+		app_user['icon'] = session.get('icon')
 		
 		print(time.time() - st)
 		
