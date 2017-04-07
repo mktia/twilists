@@ -9,6 +9,10 @@ app = Flask(__name__)
 app.secret_key = os.environ['secret_key']
 consumer_key = os.environ['consumer_key']
 consumer_secret = os.environ['consumer_secret']
+ck2 = os.environ['ck2']
+cs2 = os.environ['cs2']
+at2 = os.environ['at2']
+as2 = os.environ['as2']
 
 setting = {
 	'app_name': 'TWILIST',
@@ -42,6 +46,11 @@ def xauth_verify(key):
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url + '/' + key)
 	twitter['redirect_' + key] = auth.get_authorization_url(signin_with_twitter=True)
 	return(auth.request_token)
+	
+def verifi_with_at():
+	auth2 = tweepy.OAuthHandler(ck2, cs2)
+	auth2.set_access_token(at2, as2)
+	return(tweepy.API(auth2))
 
 def get_profile_image(obj):
 	"""
@@ -101,7 +110,7 @@ def not_fr_check():
 	if 'name' in session:
 		session['verifier'] = request.args.get('oauth_verifier')
 		api = verify('request_token_not_friend')
-	
+		
 		friends = []
 		followers = []
 		
@@ -128,7 +137,9 @@ def not_fr_check():
 		app_user['screen_name'] = session.get('screen_name')
 		app_user['icon'] = session.get('icon')
 		
-		print(time.time() - st)
+		api2 = verifi_with_at()
+		message = 'twilist: %s, time: %s (not_fr)' % (app_user['screen_name'], time.time() - st)
+		api.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=not_fr, res=res, overtime=overtime)
 	return(redirect(setting['url']))
@@ -166,7 +177,9 @@ def not_fo_check():
 		app_user['screen_name'] = session.get('screen_name')
 		app_user['icon'] = session.get('icon')
 		
-		print(time.time() - st)
+		api2 = verifi_with_at()
+		message = 'twilist: %s, time: %s (not_fo)' % (app_user['screen_name'], time.time() - st)
+		api.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=not_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
@@ -203,7 +216,9 @@ def ff_check():
 		app_user['screen_name'] = session.get('screen_name')
 		app_user['icon'] = session.get('icon')
 		
-		print(time.time() - st)
+		api2 = verifi_with_at()
+		message = 'twilist: %s, time: %s (ff)' % (app_user['screen_name'], time.time() - st)
+		api.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=fr_and_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
@@ -272,7 +287,9 @@ def is_bot_check():
 		app_user['screen_name'] = session.get('screen_name')
 		app_user['icon'] = session.get('icon')
 		
-		print(time.time() - st)
+		api2 = verifi_with_at()
+		message = 'twilist: %s, time: %s (bot)' % (app_user['screen_name'], time.time() - st)
+		api.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=bot, res=res, overtime=overtime)
 	return(redirect(setting['url']))
