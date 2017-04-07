@@ -218,31 +218,33 @@ def is_bot_check():
 		clients = ['auto', 'bot']
 		
 		for i in range(0, len(friends[:]), 100):
-			for user in api.lookup_users(friends[i:i+100]):
-				try:
-					src = user.status.source.encode('utf8')
-					for client in clients:
-						if src.find(client) != -1:
-							bot_id_tmp.append(user.id)
-							break
-				except:
-					print('error: %d'%user.id)
+			if time.time() - st < 5.0:
+				for user in api.lookup_users(friends[i:i+100]):
+					try:
+						src = user.status.source.encode('utf8')
+						for client in clients:
+							if src.find(client) != -1:
+								bot_id_tmp.append(user.id)
+								break
+					except:
+						print('error: %d'%user.id)
 		for bot_tmp in bot_id_tmp:
-			tls = api.user_timeline(id=bot_tmp)
-			try:
-				tweet_count = tls[0].author._json[u'statuses_count']
-				if tweet_count > 10:
-					tweet_count = 10
-				for i in range(tweet_count):
-					for client in clients:
-						tl = tls[i]._json[u'source']
-						if tl.find(client) != 1:
-							break
-				else:
-					bot_id.append(bot_tmp)
-			except Exception as e:
-				print(e)
-
+			if time.time() - st < 15.0:
+				tls = api.user_timeline(id=bot_tmp)
+				try:
+					tweet_count = tls[0].author._json[u'statuses_count']
+					if tweet_count > 10:
+						tweet_count = 10
+					for i in range(tweet_count):
+						for client in clients:
+							tl = tls[i]._json[u'source']
+							if tl.find(client) != 1:
+								break
+					else:
+						bot_id.append(bot_tmp)
+				except Exception as e:
+					print(e)
+		
 		overtime = make_list(api, bot_id, bot, limit_time=10)
 		res['title'] = u'定期ツイートが多いフォロー中のユーザー'
 		res['length'] = len(bot['screen_name'])
