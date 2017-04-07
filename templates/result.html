@@ -114,6 +114,7 @@
 				{% endif %}
 				{% endif %}
 				{% if i == res['length'] - 1 %}
+				{% if (i % 40 > 4) or (i < 5) %}
 				<div class="ads ads-pc ads-list">
 					<table>
 						<tr><td>
@@ -162,6 +163,7 @@
 					(adsbygoogle = window.adsbygoogle || []).push({});
 					</script>
 				</div>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			{% endif %}
