@@ -3,7 +3,6 @@ body {
 	color: #444;
 	font-family: 'Open Sans', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', serif;
 	margin: 0;
-	overflow-x: hidden;
 }
 body p, h2, h3 {
 	margin-left: 8px;
@@ -47,6 +46,7 @@ section {
 }
 .box {
 	background-color: #fff;
+	border: 1px solid #ddd;
 	border-radius: 5px;
 	color: #444;
 	display: block;
@@ -59,7 +59,6 @@ section {
 }
 .button {
 	background-color: #004898;
-	border: 1px solid #ccc;
 	border-radius: 3px;
 	color: #fff;
 	display: block;
