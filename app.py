@@ -139,7 +139,7 @@ def not_fr_check():
 		
 		api2 = verifi_with_at()
 		message = 'twilist: %s, time: %s (not_fr)' % (app_user['screen_name'], time.time() - st)
-		api.send_direct_message(screen_name='_mktia', text=message)
+		api2.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=not_fr, res=res, overtime=overtime)
 	return(redirect(setting['url']))
@@ -179,7 +179,7 @@ def not_fo_check():
 		
 		api2 = verifi_with_at()
 		message = 'twilist: %s, time: %s (not_fo)' % (app_user['screen_name'], time.time() - st)
-		api.send_direct_message(screen_name='_mktia', text=message)
+		api2.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=not_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
@@ -218,7 +218,7 @@ def ff_check():
 		
 		api2 = verifi_with_at()
 		message = 'twilist: %s, time: %s (ff)' % (app_user['screen_name'], time.time() - st)
-		api.send_direct_message(screen_name='_mktia', text=message)
+		api2.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=fr_and_fo, res=res, overtime=overtime)
 	return(redirect(setting['url']))
@@ -289,7 +289,7 @@ def is_bot_check():
 		
 		api2 = verifi_with_at()
 		message = 'twilist: %s, time: %s (bot)' % (app_user['screen_name'], time.time() - st)
-		api.send_direct_message(screen_name='_mktia', text=message)
+		api2.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=bot, res=res, overtime=overtime)
 	return(redirect(setting['url']))
