@@ -244,14 +244,14 @@ def not_use_check():
 			for user in api.lookup_users(friends[i:i+100]):
 				try:
 					last_tweet_time = user.status.created_at
-					print(last_tweet_time)
-					print(last_tweet_time[0])
-					if last_tweet_time < 2016:
+					print(last_tweet_time < datetime.datetime(2016,1,1))
+					if last_tweet_time < datetime.datetime(2016,1,1):
 						not_use_id.append(user.id)
+						print('y')
 					else:
 						break
 				except:
-					print('error: %d'%user.id)
+					print('error: %d'%user.screen_name)
 
 		overtime = make_list(api, not_use_id, not_use)
 		res['title'] = u'2016年以降呟いてないユーザー'
@@ -296,7 +296,7 @@ def is_bot_check():
 								bot_id_tmp.append(user.id)
 								break
 					except:
-						print('error: %d'%user.id)
+						print('error: %d'%user.screen_name)
 			else:
 				overtime = True
 				break
