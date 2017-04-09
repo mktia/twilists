@@ -248,7 +248,7 @@ def not_use_check():
 					if last_tweet_time < datetime.datetime(2016,1,1):
 						not_use_id.append(user.id)
 				except:
-					print('error: %d'%user.screen_name.encode('utf8'))
+					print('error: %s'%user.screen_name.encode('utf8'))
 
 		overtime = make_list(api, not_use_id, not_use)
 		res['title'] = u'2016年以降呟いてないユーザー'
@@ -293,7 +293,7 @@ def is_bot_check():
 								bot_id_tmp.append(user.id)
 								break
 					except:
-						print('error: %d'%user.screen_name.encode('utf8'))
+						print('error: %s'%user.screen_name.encode('utf8'))
 			else:
 				overtime = True
 				break
