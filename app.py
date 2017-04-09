@@ -250,7 +250,7 @@ def not_use_check():
 						not_use_id.append(user.id)
 						print('y')
 				except:
-					print('error: %d'%user.screen_name)
+					print('error: %d'%user.screen_name.encode('utf8'))
 
 		overtime = make_list(api, not_use_id, not_use)
 		res['title'] = u'2016年以降呟いてないユーザー'
@@ -295,7 +295,7 @@ def is_bot_check():
 								bot_id_tmp.append(user.id)
 								break
 					except:
-						print('error: %d'%user.screen_name)
+						print('error: %d'%user.screen_name.encode('utf8'))
 			else:
 				overtime = True
 				break
