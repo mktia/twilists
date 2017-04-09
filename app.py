@@ -245,10 +245,8 @@ def not_use_check():
 			for user in api.lookup_users(friends[i:i+100]):
 				try:
 					last_tweet_time = user.status.created_at
-					print(last_tweet_time < datetime.datetime(2016,1,1))
 					if last_tweet_time < datetime.datetime(2016,1,1):
 						not_use_id.append(user.id)
-						print('y')
 				except:
 					print('error: %d'%user.screen_name.encode('utf8'))
 
