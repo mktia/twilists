@@ -256,7 +256,7 @@ def is_bot_check():
 				overtime = True
 				break
 		for bot_tmp in bot_id_tmp:
-			if time.time() - st < 15.0:
+			if time.time() - st < 18.0:
 				tls = api.user_timeline(id=bot_tmp)
 				try:
 					tweet_count = tls[0].author._json[u'statuses_count']
