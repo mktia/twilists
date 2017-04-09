@@ -249,8 +249,6 @@ def not_use_check():
 					if last_tweet_time < datetime.datetime(2016,1,1):
 						not_use_id.append(user.id)
 						print('y')
-					else:
-						break
 				except:
 					print('error: %d'%user.screen_name)
 
