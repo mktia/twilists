@@ -81,6 +81,7 @@ def top():
 		session['request_token_not_friend'] = xauth_verify('not_friend')
 		session['request_token_not_follow'] = xauth_verify('not_follow')
 		session['request_token_ff'] = xauth_verify('ff')
+		session['request_token_not_use'] = xauth_verify('not_use')
 		session['request_token_bot_check'] = xauth_verify('bot_check')
 		app_user['name'] = session.get('name')
 		app_user['screen_name'] = session.get('screen_name')
@@ -221,6 +222,48 @@ def ff_check():
 		api2.send_direct_message(screen_name='_mktia', text=message)
 		
 		return render_template('result.html', info=setting,	user=app_user, list=fr_and_fo, res=res, overtime=overtime)
+	return(redirect(setting['url']))
+
+@app.route('/not_use')
+def not_use_check():
+	st = time.time()
+	if 'name' in session:
+		session['verifier'] = request.args.get('oauth_verifier')
+		api = verify('request_token_not_use')
+		
+		friends = []
+		followers = []
+		
+		for fr in tweepy.Cursor(api.friends_ids).items():
+			friends.append(fr)
+		
+		not_use_id = []	
+		not_use = {'name':[], 'screen_name':[], 'icon':[]}
+		
+		for i in range(0, len(friends[:]), 100):
+			for user in api.lookup_users(friends[i:i+100]):
+				try:
+					last_tweet_time = user.status.created_at[0]
+					if last_tweet_time < 2016:
+						not_use_id.append(user.id)
+					else:
+						break
+				except:
+					print('error: %d'%user.id)
+
+		overtime = make_list(api, not_use_id, not_use)
+		res['title'] = u'2016年以降呟いてないユーザー'
+		res['length'] = len(not_use['screen_name'])
+		res['message'] = u'該当するユーザーはいませんでした。'
+		app_user['name'] = session.get('name')
+		app_user['screen_name'] = session.get('screen_name')
+		app_user['icon'] = session.get('icon')
+		
+		api2 = verifi_with_at()
+		message = 'twilist: %s, time: %s (use)' % (app_user['screen_name'], time.time() - st)
+		api2.send_direct_message(screen_name='_mktia', text=message)
+		
+		return render_template('result.html', info=setting,	user=app_user, list=not_use, res=res, overtime=overtime)
 	return(redirect(setting['url']))
 
 @app.route('/bot_check')
