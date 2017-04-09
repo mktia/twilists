@@ -243,7 +243,9 @@ def not_use_check():
 		for i in range(0, len(friends[:]), 100):
 			for user in api.lookup_users(friends[i:i+100]):
 				try:
-					last_tweet_time = user.status.created_at[0]
+					last_tweet_time = user.status.created_at
+					print(last_tweet_time)
+					print(last_tweet_time[0])
 					if last_tweet_time < 2016:
 						not_use_id.append(user.id)
 					else:
