@@ -159,7 +159,8 @@ section {
     color: #444;
 }
 .main header {
-    background-color: #55acee;
+    background: linear-gradient(to bottom right, #1da1f2, #1da);
+    //background-color: #55acee;
     margin-left: -896px;
     margin-right: -896px;
 }
