@@ -86,6 +86,10 @@ section {
     height: 2.4em;
 }
 .index {
+    background: linear-gradient(to bottom right, #1da1f2, #1da);
+}
+/*
+.index {
     background-attachment: fixed;
     background-image: url('background.jpg');
     background-position: center center;
@@ -93,6 +97,7 @@ section {
     background-size: cover;
     -webkit-background-size: cover;
 }
+*/
 .index footer a, .index footer p {
     color: #ccc;
 }
