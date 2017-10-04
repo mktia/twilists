@@ -1,135 +1,142 @@
 <html>
 <head>
-	<!--[if IE]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
-	<![endif]-->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="{{info['description']}}">
-	<meta property="og:type" content="website">
-	<meta property="og:description" content="{{info['description']}}">
-	<meta property="og:title" content="{{info['app_name']}} ({{info['name']}})">
-	<meta property="og:url" content="{{info['url']}}">
-	<meta property="og:image" content="{{info['url']}}/static/ogp_small.jpg">
-	<meta property="og:site_name" content="{{info['app_name']}} ({{info['name']}})">
-	<meta property="og:locale" content="ja_JP">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:description" content="{{info['description']}}">
-	<meta name="twitter:title" content="{{info['app_name']}} {{info['name']}}">
-	<meta name="twitter:url" content="{{info['url']}}">
-	<meta name="twitter:image" content="{{info['url']}}/static/ogp_small.jpg">
-	<meta name="twitter:domain" content="{{info['url']}}">
-	<meta name="twitter:creator" content="@_mktia">
-	<meta name="twitter:site" content="@_mktia">
-	<title>{{info['app_name']}} ({{info['name']}}) | {{info['short_description']}}</title>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
-	<link rel="stylesheet" href="../static/style.css" type="text/css">
-	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{info['description']}}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{info['description']}}">
+    <meta property="og:title" content="{{info['app_name']}} ({{info['name']}})">
+    <meta property="og:url" content="{{info['url']}}">
+    <meta property="og:image" content="{{info['url']}}/static/ogp_small.jpg">
+    <meta property="og:site_name" content="{{info['app_name']}} ({{info['name']}})">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="{{info['description']}}">
+    <meta name="twitter:title" content="{{info['app_name']}} {{info['name']}}">
+    <meta name="twitter:url" content="{{info['url']}}">
+    <meta name="twitter:image" content="{{info['url']}}/static/ogp_small.jpg">
+    <meta name="twitter:domain" content="{{info['url']}}">
+    <meta name="twitter:creator" content="@_mktia">
+    <meta name="twitter:site" content="@_mktia">
+    <title>{{info['app_name']}} ({{info['name']}}) | {{info['short_description']}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css" type="text/css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body class="main">
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-60167522-23', 'auto');
-	  ga('send', 'pageview');
+      ga('create', 'UA-60167522-23', 'auto');
+      ga('send', 'pageview');
 
-	</script>
-	<div class="contents">
-		<header>
-			<div class="header-bar">
-				<a href="{{info['url']}}"><h1>{{info['app_name']}}</h1></a>
-				<a class="icon-link" href="http://twitter.com/{{user['screen_name']}}"><img class="icon" src="{{user['icon']}}"></a>
-			</div>
-		</header>
-		<section>
-			<h2 id="attention">注意事項</h2>
-			<p>何度も繰り返し実行すると、<b>API Limits により凍結する恐れ</b>があります。</p>
-			<p>リスト生成には数十秒を要します。<b>実行中はブラウザを閉じないでください。</b></p>
-			<p>フォロー・フォロワー数が多いアカウントでは実行時間がかなり長くなるため、やむなく途中で解析を終了することがありますが、ご了承ください。</p>
-		</section>
-		<section>
-			<div class="ads ads-pc">
-				<table>
-					<tr><td>
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- twilist-main-336 -->
-						<ins class="adsbygoogle"
-							 style="display:inline-block;width:336px;height:280px"
-							 data-ad-client="ca-pub-3718490269566520"
-							 data-ad-slot="8671335091"></ins>
-						<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-					</td>
-					<td>
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- twilist-main-336 -->
-						<ins class="adsbygoogle"
-							 style="display:inline-block;width:336px;height:280px"
-							 data-ad-client="ca-pub-3718490269566520"
-							 data-ad-slot="8671335091"></ins>
-						<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-					</td></tr>
-				</table>
-			</div>
-			<div class="ads ads-sp">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- twilist-main-336 -->
-				<ins class="adsbygoogle"
-					 style="display:inline-block;width:336px;height:280px"
-					 data-ad-client="ca-pub-3718490269566520"
-					 data-ad-slot="8671335091"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-			<div class="ads ads-sp-small">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- twilist-main-300 -->
-				<ins class="adsbygoogle"
-					 style="display:inline-block;width:300px;height:250px"
-					 data-ad-client="ca-pub-3718490269566520"
-					 data-ad-slot="1148068292"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</section>
-		<section>
-			<h2>機能</h2>
-			<p>アカウントを色々な特徴によってリストにまとめることができます。</p>
-			<p>※実行前に<a href="#attention">注意事項</a>をお読みください。実行結果に対して責任は負いかねます。</p>
-			<br>
-			<h3>フォロー返し忘れリスト</h3>
-			<p>フォロバされているけれど、フォローしていないユーザーのリストです。</p>
-			<p><a class="button" href="{{twitter['redirect_not_friend']}}">解析開始</a></p>
-			<br>
-			<h3>フォローされてないリスト</h3>
-			<p>フォローしているけれど、フォロバされていないユーザーのリストです。</p>
-			<p><a class="button" href="{{twitter['redirect_not_follow']}}">解析開始</a></p>
-			<br>
-			<h3>互いにフォローしているリスト</h3>
-			<p>相互フォローになっているユーザーのリストです。</p>
-			<p><a class="button" href="{{twitter['redirect_ff']}}">解析開始</a></p>
-			<br>
-			<h3>長期間ツイートしてないリスト</h3>
-			<p>2016年以降ツイートしていないユーザーのリストです。</p>
-			<p><a class="button" href="{{twitter['redirect_not_use']}}">解析開始</a></p>
-			<br>
-			<h3>定期ツイートが多いリスト</h3>
-			<p>BOT による投稿が 10 回以上続いているユーザーのリストです。</p>
-			<p><a class="button" href="{{twitter['redirect_bot_check']}}">解析開始</a></p>
-		</section>
-		<footer>
-			<p><a href="{{info['url']}}/about">About</a> | <a href="{{info['url']}}/version">Version</a></p>
-			<p>&copy;2017 <a href="http://twitter.com/_mktia">mktia</a> All rights reserved.</p>
-		</footer>
-	</div>
+    </script>
+    <div class="contents">
+        <header>
+            <div class="header-bar">
+                <a href="{{info['url']}}"><h1>{{info['app_name']}}</h1></a>
+                <a class="icon-link" href="http://twitter.com/{{user['screen_name']}}"><img class="icon" src="{{user['icon']}}"></a>
+            </div>
+        </header>
+        <section>
+            <h2 id="attention">注意事項</h2>
+            <p>何度も繰り返し実行すると、<b>API Limits により凍結する恐れ</b>があります。</p>
+            <p>リスト生成には数十秒を要します。<b>実行中はブラウザを閉じないでください。</b></p>
+            <p>フォロー・フォロワー数が多いアカウントでは実行時間がかなり長くなるため、やむなく途中で解析を終了することがありますが、ご了承ください。</p>
+        </section>
+        <section>
+            <div class="ads ads-pc">
+                <table>
+                    <tr><td>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- twilist-main-336 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:336px;height:280px"
+                             data-ad-client="ca-pub-3718490269566520"
+                             data-ad-slot="8671335091"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </td>
+                    <td>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- twilist-main-336 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:336px;height:280px"
+                             data-ad-client="ca-pub-3718490269566520"
+                             data-ad-slot="8671335091"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </td></tr>
+                </table>
+            </div>
+            <div class="ads ads-sp">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- twilist-main-336 -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-3718490269566520"
+                     data-ad-slot="8671335091"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="ads ads-sp-small">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- twilist-main-300 -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-3718490269566520"
+                     data-ad-slot="1148068292"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </section>
+        <section>
+            <h2>機能</h2>
+            <p>アカウントを色々な特徴によってリストにまとめることができます。</p>
+            <p>※実行前に<a href="#attention">注意事項</a>をお読みください。実行結果に対して責任は負いかねます。</p>
+            <br>
+            <h3>フォロー返し忘れリスト</h3>
+            <p>フォロバされているけれど、フォローしていないユーザーのリストです。</p>
+            <p><a class="button" href="{{twitter['redirect_not_friend']}}">解析開始</a></p>
+            <br>
+            <h3>フォローされてないリスト</h3>
+            <p>フォローしているけれど、フォロバされていないユーザーのリストです。</p>
+            <p><a class="button" href="{{twitter['redirect_not_follow']}}">解析開始</a></p>
+            <br>
+            <h3>互いにフォローしているリスト</h3>
+            <p>相互フォローになっているユーザーのリストです。</p>
+            <p><a class="button" href="{{twitter['redirect_ff']}}">解析開始</a></p>
+            <br>
+            <h3>長期間ツイートしてないリスト</h3>
+            <p>2016年以降ツイートしていないユーザーのリストです。</p>
+            <p><a class="button" href="{{twitter['redirect_not_use']}}">解析開始</a></p>
+            <br>
+            <h3>定期ツイートが多いリスト</h3>
+            <p>BOT による投稿が 10 回以上続いているユーザーのリストです。</p>
+            <p><a class="button" href="{{twitter['redirect_bot_check']}}">解析開始</a></p>
+        </section>
+        <footer>
+            <p><a href="{{info['url']}}/about">About</a> | <a href="{{info['url']}}/version">Version</a></p>
+            <p>&copy;
+                <script>
+                    var date = new Date();
+                    var year = date.getFullYear();
+                    document.write(year);
+                </script>
+                <a href="http://twitter.com/_mktia">mktia</a>.
+            </p>
+        </footer>
+    </div>
 </body>
 </html>
