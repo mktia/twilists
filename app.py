@@ -18,7 +18,7 @@ as2 = os.environ['as2']
 setting = {
 	'app_name': 'TWILIST',
 	'name': u'ツイリスト',
-	'description': u'相互フォローチェック、定期ツイート・BOT排除などに活用できるアプリ TWILIST (ツイリスト)', 
+	'description': u'相互フォローチェック、定期ツイート・BOT検出に活用できるアプリ TWILIST (ツイリスト)', 
 	'short_description': u'自動生成リストで Twitter をより便利に',
 	#'url': 'https://twilists.herokuapp.com',
 	'url': 'http://twilist.mktia.com',
